@@ -1,0 +1,31 @@
+/* 
+Пробелы/ Посчитать количество пробелов к общему числу символов.
+*/
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(args[0]);
+        int i;
+        double count = 0.0;
+        double countAll = 0.0;
+
+        while((i = fileInputStream.read())!= -1){
+            if (i==32){
+                count++;
+            } else countAll++;
+        }
+        System.out.println("Count is " + count);
+        System.out.println("CountAll is " + countAll);
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.println(df.format((count/(countAll+count))*100));
+        fileInputStream.close();
+
+
+
+
+    }
+}
