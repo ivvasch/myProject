@@ -1,0 +1,23 @@
+/* 
+Английские буквы. Посчитать количество английских букв в файле.
+*/
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+
+        FileInputStream fileInputStream = new FileInputStream(args[0]);
+        int i;
+        Character latin;
+        int count = 0;
+        while((i = fileInputStream.read())!= -1){
+            latin = (char)i;
+            if ((latin >= 'A' && latin <= 'Z') || (latin >= 'a' && latin <= 'z')){
+                count++;
+            }
+        }
+        System.out.println(count);
+        fileInputStream.close();
+
+    }
+}
