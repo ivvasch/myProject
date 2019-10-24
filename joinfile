@@ -1,0 +1,31 @@
+/* 
+Объединение файлов. Записать данные второго файла в начало первогою
+*/
+
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String str = reader.readLine();
+        FileInputStream fileInputStream1 = new FileInputStream(str);
+        FileInputStream fileInputStream2 = new FileInputStream(reader.readLine());
+
+        byte[] buff1 = new byte[fileInputStream1.available()];
+        byte[] buff2 = new byte[fileInputStream2.available()];
+        byte[] buff3 = new byte[0];
+
+        fileInputStream1.read(buff1);
+        fileInputStream2.read(buff2);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(str);
+        fileOutputStream.write(buff3);
+        fileOutputStream.write(buff2);
+        fileOutputStream.write(buff1);
+
+            fileInputStream1.close();
+            fileInputStream2.close();
+            fileOutputStream.close();
+    }
+}
