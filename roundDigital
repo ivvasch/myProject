@@ -1,0 +1,27 @@
+/* 
+Округление чисел. Считать данные из первого файла, округлить и записать во второй.
+*/
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        FileInputStream fileInputStream = new FileInputStream(reader.readLine());
+        Scanner scanner = new Scanner(fileInputStream);
+        FileOutputStream fileOutputStream = new FileOutputStream(reader.readLine());
+
+        while (scanner.hasNext()){
+            double dob = scanner.nextDouble();
+            double result = Math.round(dob);
+            int i = (int) result;
+            String res = i + " ";
+            fileOutputStream.write(res.getBytes(), 0, res.length());
+        }
+        fileInputStream.close();
+        fileOutputStream.close();
+    }
+
+}
