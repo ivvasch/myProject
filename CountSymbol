@@ -1,0 +1,26 @@
+/* 
+Встречаемость символов
+*/
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+
+        FileInputStream fileInputStream = new FileInputStream(args[0]);
+        Map<Integer, Integer> treemap = new TreeMap<>();
+        while (fileInputStream.available() > 0){
+            int i = fileInputStream.read();
+            treemap.merge(i,1, (oldVal ,newVal) -> oldVal + newVal);
+
+        }
+        for (Map.Entry<Integer, Integer> map: treemap.entrySet()) {
+            int i = fileInputStream.read();
+            System.out.println((char)(map.getKey().intValue()) + " " +  map.getValue());
+        }
+        fileInputStream.close();
+    }
+}
