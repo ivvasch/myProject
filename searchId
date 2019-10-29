@@ -1,0 +1,31 @@
+/* 
+Поиск данных внутри файла
+*/
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String str = reader.readLine();
+        FileInputStream fileInputStream = new FileInputStream(str);
+        Scanner scanner = new Scanner(fileInputStream);
+
+        while (scanner.hasNextLine()){
+            String[] str2 = scanner.nextLine().split(" ");
+            if (args[0].equals(str2[0])){
+                for (int i = 0; i < str2.length; i++) {
+                    System.out.print(str2[i] + " ");
+                }
+            }
+        }
+        fileInputStream.close();
+        scanner.close();
+        reader.close();
+
+    }
+}
