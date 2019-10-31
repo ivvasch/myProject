@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+/* 
+Собираем файл
+*/
+
+public class Solution {
+    static Map<String, String> treemap = new TreeMap<>();
+    static String[] gFile = new String[1];
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String str = reader.readLine();
+        String[] file = str.split("avi");
+        gFile[0] = file[0] + "avi";
+        File newFile = new File(gFile[0]);
+        while (!str.equals("end")){
+            partN(str);
+            str = reader.readLine();
+        }
+        for (Map.Entry<String,String> trmp : treemap.entrySet()) {
+            FileInputStream inputStream = new FileInputStream(trmp.getValue());
+            byte[] buff = new byte[inputStream.available()];
+            int i = inputStream.read(buff);
+            inputStream.close();
+            FileOutputStream outputStream = new FileOutputStream(gFile[0],true);
+            outputStream.write(buff);
+            outputStream.close();
+        }
+        reader.close();
+
+
+    }
+    static void partN(String part){
+        String[] file = part.split("avi");
+        treemap.put(file[1], part);
+
+        }
+}
