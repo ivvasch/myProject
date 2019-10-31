@@ -1,0 +1,49 @@
+package com.javarush.task.task18.task1824;
+
+/* 
+Файлы и исключения. Вводить файлы и запускать потоки чтения из файлов, если введен несуществующий файл, вывести в консоль его имя выкинуть исключение и завершить программу.
+*/
+
+import java.io.*;
+
+public class Solution {
+    public static Integer count = 0;
+    public static void main(String[] args) throws IOException, InterruptedException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            if (count == 1) {
+                break;
+            }
+            String str = reader.readLine();
+            Thread myThread = new MyThread(str);
+            myThread.start();
+            Thread.sleep(1000);
+        }
+        reader.close();
+    }
+
+    public static class MyThread extends Thread {
+        private String fileReader;
+
+        public MyThread(String fileReader) {
+            this.fileReader = fileReader;
+        }
+
+        @Override
+        public void run() {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(fileReader);
+                while (fileInputStream.available() > 0) {
+                    int i = fileInputStream.read();
+                }
+                fileInputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.out.println(fileReader);
+                Solution.count = 1;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
