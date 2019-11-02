@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+/* 
+Собираем файл
+*/
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Map<Integer, String> treemap = new TreeMap<>();
+
+        String str = reader.readLine();
+        String finalName = str.split(".part")[0];
+        while (!(str.equals("end"))){
+            treemap.put(Integer.parseInt(str.split(".part")[1]), str);
+        str = reader.readLine();}
+        FileOutputStream fileOutputStream = new FileOutputStream(finalName);
+        for (Map.Entry<Integer, String> map: treemap.entrySet()){
+                FileInputStream fileInputStream = new FileInputStream(map.getValue());
+                byte[] buff = new byte[fileInputStream.available()];
+                fileInputStream.read(buff);
+                fileOutputStream.write(buff);
+                fileInputStream.close();
+            }
+            fileOutputStream.close();
+      }
+ }
