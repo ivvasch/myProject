@@ -1,0 +1,42 @@
+/* 
+Шифровка
+*/
+
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+
+        FileInputStream inputStream = new FileInputStream(args[1]);
+        byte[] buff = new byte[inputStream.available()];
+        if (args[0].equals("-e")){
+            while (inputStream.available() > 0){
+                inputStream.read(buff);
+            }
+            inputStream.close();
+            byte[] buff2 = new byte[buff.length];
+            for (int i = 0, k = (buff2.length-1); i < buff.length; i++) {
+                buff2[k] = buff[i];
+                k--;}
+
+                FileOutputStream outputStream = new FileOutputStream(args[2]);
+                outputStream.write(buff2);
+                outputStream.close();
+
+        } else
+        if (args[0].equals("-d")){
+            while(inputStream.available() > 0){
+                inputStream.read(buff);
+            }
+            inputStream.close();
+            byte[] buff3 = new byte[buff.length];
+            for (int i = 0, k = (buff3.length-1); i < buff.length; i++) {
+                buff3[k] = buff[i];
+                k--;}
+
+                FileOutputStream outputStream = new FileOutputStream(args[2]);
+                outputStream.write(buff3);
+                outputStream.close();
+            }
+    }
+}
