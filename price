@@ -1,0 +1,67 @@
+/*
+Прайсы. Добавить товар в конец списка
+*/
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        List<Integer> id = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String file = reader.readLine();
+        BufferedReader fr = new BufferedReader(new FileReader((file)));
+        while (fr.ready()) {
+            String str = fr.readLine();
+            id.add(Integer.parseInt(str.substring(0, 8).trim()));
+        }
+        Collections.sort(id);
+        Collections.reverse(id);
+
+        String nextId = "" + (id.get(0) + 1);
+if (args.length != 0) {
+    String[] newProduct = {nextId, args[1], args[2], args[3]};
+    int length = newProduct[0].length();
+    if (length < 8) {
+        for (int i1 = 0; i1 < (8 - length); i1++) {
+            newProduct[0] = newProduct[0] + " ";
+        }
+    } else {
+        newProduct[0] = newProduct[0].substring(0, 8);
+    }
+    int length1 = newProduct[1].length();
+    if (length1 < 30) {
+        for (int i1 = 0; i1 < (30 - length1); i1++) {
+            newProduct[1] = newProduct[1] + " ";
+        }
+    } else {
+        newProduct[1] = newProduct[1].substring(0, 30);
+    }
+    int length2 = newProduct[2].length();
+    if (length2 < 8) {
+        for (int i1 = 0; i1 < (8 - length2); i1++) {
+            newProduct[2] = newProduct[2] + " ";
+        }
+    } else {
+        newProduct[2] = newProduct[2].substring(0, 8);
+    }
+    int length3 = newProduct[3].length();
+    if (length3 < 4) {
+        for (int i1 = 0; i1 < (4 - length3); i1++) {
+            newProduct[3] = newProduct[3] + " ";
+        }
+    } else {
+        newProduct[3] = newProduct[3].substring(0, 4);
+    }
+    String addProduct = ("\n" + newProduct[0] + newProduct[1] + newProduct[2] + newProduct[3]);
+    byte[] buff = addProduct.getBytes();
+    reader.close();
+    fr.close();
+                FileOutputStream outputStream = new FileOutputStream(file,true);
+                outputStream.write(buff);
+                outputStream.close();
+}
+
+    }
+}
+
