@@ -1,0 +1,29 @@
+/* 
+Считаем слово
+*/
+
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String str = reader.readLine();
+        FileReader fileReader = new FileReader(str);
+        int i = 0;
+        String line = "";
+        while (fileReader.ready()){
+            i = fileReader.read();
+            line = line + (char)i;
+        }
+        int count = 0;
+        reader.close();
+        fileReader.close();
+        String[] world = line.split("\\W");
+        for (int i1 = 0; i1 < world.length; i1++) {
+            if (world[i1].equals("world")){
+               count++;
+           }
+        }
+        System.out.println(count);
+    }
+}
