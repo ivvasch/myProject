@@ -1,0 +1,35 @@
+/* 
+Ридер обертка 2 Подменить объект System.out и в ридер обертке заменить "te" на "??"
+*/
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+public class Solution {
+    public static TestString testString = new TestString();
+
+    public static void main(String[] args) {
+        PrintStream consoleStream = System.out;
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream stream = new PrintStream(byteArrayOutputStream);
+        System.setOut(stream);
+
+        testString.printSomething();
+
+        String result = byteArrayOutputStream.toString();
+
+        System.setOut(consoleStream);
+
+        StringBuilder sb = new StringBuilder(result);
+        String resultUpper = sb.toString().replaceAll("te", "??");
+
+        System.out.println(resultUpper);
+    }
+
+    public static class TestString {
+        public void printSomething() {
+            System.out.println("it's a text for testing");
+        }
+    }
+}
