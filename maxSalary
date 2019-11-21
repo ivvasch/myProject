@@ -1,0 +1,31 @@
+/* 
+Самый богатый
+*/
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        Map<String,Double> map = new TreeMap<>();
+        List<Double> list = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader((args[0])));
+        while (bufferedReader.ready()) {
+            String str = bufferedReader.readLine();
+            String[] mass = str.split(" ");
+            map.merge(mass[0], Double.parseDouble(mass[1]), Double::sum);
+        }
+        bufferedReader.close();
+        for (Map.Entry<String, Double> mapp: map.entrySet()) {
+            list.add(mapp.getValue());
+        }
+//        Collections.max(list);
+        for (Map.Entry<String, Double> mapp: map.entrySet()) {
+            if (mapp.getValue().equals(Collections.max(list))){
+            System.out.println(mapp.getKey());
+            }
+        }
+    }
+}
