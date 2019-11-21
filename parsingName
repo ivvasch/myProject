@@ -1,0 +1,51 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+/* 
+Получить из файла строки с именем и днем рождения и добавить их в list
+*/
+
+public class Solution {
+    public static final List<Person> PEOPLE = new ArrayList<Person>();
+
+    public static void main(String[] args) throws IOException, ParseException {
+        BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+
+        while (reader.ready()){
+            String str = reader.readLine();
+            String[] mass = str.split(" ");
+            if (Character.isDigit(mass[1].charAt(0))){
+                String format = "dd/MM/yyyy";
+                SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+                Date date = dateFormat.parse(mass[1] + "/" + mass[2] + "/" + mass[3]);
+            PEOPLE.add(new Person(mass[0], date));
+            } else
+                if (Character.isDigit(mass[2].charAt(0))){
+                String format = "dd/MM/yyyy";
+                SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+                Date date = dateFormat.parse(mass[2] + "/" + mass[3] + "/" + mass[4]);
+            PEOPLE.add(new Person(mass[0]+ " " + mass[1], date));
+
+            } else {
+                    String format = "dd/MM/yyyy";
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+                    Date date = dateFormat.parse(mass[3] + "/" + mass[4] + "/" + mass[5]);
+                    PEOPLE.add(new Person(mass[0]+ " " + mass[1]+ " " + mass[2], date));
+                }
+
+        }
+        reader.close();
+        for (int i = 0; i < PEOPLE.size(); i++) {
+            System.out.println(PEOPLE.get(i).getName() + " " + PEOPLE.get(i).getBirthDate());
+
+        }
+    }
+}
