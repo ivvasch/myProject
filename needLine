@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+/* 
+Ищем нужные строки
+*/
+
+public class Solution {
+    public static List<String> words = new ArrayList<String>();
+
+    static {
+        words.add("файл");
+        words.add("вид");
+        words.add("В");
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String file = reader.readLine();
+        reader.close();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        int count = 0;
+        while (bufferedReader.ready()) {
+            String str = bufferedReader.readLine();
+            String[] mass = str.split("[\\p{Space}\\p{Punct}]+");
+            for (int i = 0; i < words.size(); i++) {
+                String s = words.get(i);
+                for (int i1 = 0; i1 < mass.length; i1++) {
+                    if (s.equals(mass[i1])) {
+                        count = count+1;
+                    }
+                }
+            }
+            if (count == 2) {
+                System.out.println(str);
+            }
+            count = 0;
+        }
+        bufferedReader.close();
+    }
+}
