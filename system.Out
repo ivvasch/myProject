@@ -1,0 +1,43 @@
+/* 
+Контекстная реклама. Вставить строку между 2мя выводами в консоль
+*/
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+public class Solution {
+    public static TestString testString = new TestString();
+
+    public static void main(String[] args) {
+        PrintStream consoleStream = System.out;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream stream = new PrintStream(outputStream);
+
+        System.setOut(stream);
+
+        testString.printSomething();
+
+        String result = outputStream.toString();
+        String[] resultmass = result.split("\\n");
+        System.setOut(consoleStream);
+
+        int k = 2;
+        for (int i = 0; i < resultmass.length; i++) {
+            if (i == k) {
+                System.out.println("JavaRush - курсы Java онлайн");
+                System.out.println(resultmass[i]);
+                k = k+2;
+            } else System.out.println(resultmass[i]);
+        }
+    }
+
+    public static class TestString {
+        public void printSomething() {
+            System.out.println("first");
+            System.out.println("second");
+            System.out.println("third");
+            System.out.println("fourth");
+            System.out.println("fifth");
+        }
+    }
+}
