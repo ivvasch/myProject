@@ -1,0 +1,39 @@
+package com.javarush.task.task31.task3112;
+
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+/* 
+Загрузчик файлов. Взять файл по ссылке и сохранить его в свою дирректорию.
+*/
+public class Solution {
+
+    public static void main(String[] args) throws IOException {
+        Path passwords = downloadFile("https://javarush.ru/testdata/secretPasswords.txt", Paths.get("C:\\Users\\User01\\Downloads"));
+
+        for (String line : Files.readAllLines(passwords)) {
+            System.out.println(line);
+        }
+    }
+
+    public static Path downloadFile(String urlString, Path downloadDirectory) throws IOException {
+        String[] urlStr = urlString.split("/");
+        URL url = new URL(urlString);
+        InputStream inputStreamUrl = url.openStream();
+
+        Path tempFile = Files.createTempFile("tmp2", ".tmp");
+        Files.copy(inputStreamUrl, tempFile, StandardCopyOption.REPLACE_EXISTING);
+
+        String newFile1 = urlStr[urlStr.length - 1];
+        Path newFile = Paths.get(Paths.get(downloadDirectory.toString()) + "/" + newFile1);
+
+            Files.move(tempFile, newFile, StandardCopyOption.REPLACE_EXISTING);
+
+
+        return newFile;
+    }
+}
