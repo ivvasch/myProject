@@ -1,0 +1,46 @@
+package com.javarush.task.task32.task3210;
+
+/* 
+Используем RandomAccessFile
+*/
+
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String... args) throws IOException {
+
+        RandomAccessFile raf = new RandomAccessFile(args[0], "rw");
+        // находим длинну текста
+        int lengthText = args[2].length();
+        // устанавливаем курсор в позицию переданную во втором аргументе
+        raf.seek(Integer.parseInt(args[1]));
+        // создаем буфер с размером массива равным длине переданного текста для считывания текста этой длины из файла
+        byte[] buffRead = new byte[lengthText];
+        // считываем часть текста 0-я позиция, с которой начинается считывание, в данном случае это место в которое мы уже поставили курсор raf.seek(Integer.parseInt(args[1]))
+        raf.read(buffRead, 0, lengthText);
+//        проверял на правильную ли позицию поставил курсор в файле, перевел весь buffRead в строку
+//      System.out.print(new String(buffRead));
+        //перевожу в массив байт переданную строку
+        byte[] buffText = args[2].getBytes();
+        // добавляю флаги для записи в конец файла
+        String tr = "true";
+        String fl = "false";
+        // сравниваю 2 массива
+        if (Arrays.equals(buffRead, buffText)){
+            byte[] buffTrue = tr.getBytes();
+            // записываю в конец файла true
+            raf.seek(raf.length());
+            raf.write(buffTrue);
+        } else {
+            byte[] buffFalse = fl.getBytes();
+            // записываю в конец файла false
+            raf.seek(raf.length());
+            raf.write(buffFalse);
+        }
+        raf.close();
+    }
+}
+
+// The reason for this is to configure your application to run a particular way or provide it with some piece of information it needs.
